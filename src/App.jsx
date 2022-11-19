@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header.jsx';
 import TodoForm from './components/TodoForm.jsx';
 import TodoList from './components/TodoList.jsx';
+import DeleteCompleted from './components/DeleteComplete.jsx';
 
 function App() {
 
@@ -34,15 +35,12 @@ function App() {
     setTodoListItems(filtered);
   };
 
-  const editItem = () => {
-
-  };
-
   return (
     <div>
       <Header />
       <TodoForm addTask={addTask} />
       <TodoList todoListItems={todoListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
+      <DeleteCompleted handleFilter={handleFilter} />
     </div>
   );
 };

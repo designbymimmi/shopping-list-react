@@ -1,15 +1,14 @@
 import React from "react";
 import Todo from './Todo.jsx'
 
-function TodoList({ todoListItems, handleToggle, handleFilter }) {
+function TodoList({ todoListItems, handleToggle }) {
     return (
         <ul className="list-group">
             {todoListItems.map(todoItem => {
                 return (
-                    <Todo todoItem={todoItem} handleToggle={handleToggle} handleFilter={handleFilter}/>
+                    <Todo todoItem={todoItem} handleToggle={handleToggle} />
                 )
             })}
-            <button onClick={handleFilter} className="btn btn-danger font-weight-bold">Delete Completed</button>
         </ul>
     )
 };
