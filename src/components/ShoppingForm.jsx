@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TodoForm({ addTask }) {
+function ShoppingForm({ addTask }) {
     const [userInput, setUserInput] = useState('');
 
     const handleChange = (e) => {
@@ -25,4 +25,4 @@ function TodoForm({ addTask }) {
     )
 };
 
-export default TodoForm;
+export default ShoppingForm;

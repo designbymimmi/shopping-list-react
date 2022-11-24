@@ -1,45 +1,45 @@
 import React, { useState } from "react";
 import './App.css';
 import Header from './components/Header.jsx';
-import TodoForm from './components/TodoForm.jsx';
-import TodoList from './components/TodoList.jsx';
+import ShoppingForm from './components/ShoppingForm.jsx';
+import ShoppingList from './components/ShoppingList.jsx';
 import DeleteCompleted from './components/DeleteComplete.jsx';
 
 function App() {
 
-  const [todoListItems, setTodoListItems] = useState([]);
+  const [shoppingListItems, setshoppingListItems] = useState([]);
 
   const addTask = (userInputText) => {
-    const newTodo = {
+    const newshopping = {
       id: new Date().getTime(), //create unique ID
       text: userInputText,
       completed: false
     }
-    setTodoListItems([...todoListItems].concat(newTodo));
+    setshoppingListItems([...shoppingListItems].concat(newshopping));
   };
 
   const handleToggle = (id) => {
-    const updatedTodoItems = [...todoListItems].map((todo) => {
-      if (todo.id == id) {
-        todo.completed = !todo.completed; 
+    const updatedshoppingItems = [...shoppingListItems].map((shopping) => {
+      if (shopping.id == id) {
+        shopping.completed = !shopping.completed; 
       }
-      return todo;
+      return shopping;
     })
-    setTodoListItems(updatedTodoItems);
+    setshoppingListItems(updatedshoppingItems);
   };
 
   const handleFilter = () => {
-    let filtered = todoListItems.filter(task => {
+    let filtered = shoppingListItems.filter(task => {
       return !task.completed;
     });
-    setTodoListItems(filtered);
+    setshoppingListItems(filtered);
   };
 
   return (
     <div>
       <Header />
-      <TodoForm addTask={addTask} />
-      <TodoList todoListItems={todoListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
+      <ShoppingForm addTask={addTask} />
+      <ShoppingList shoppingListItems={shoppingListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
       <DeleteCompleted handleFilter={handleFilter} />
     </div>
   );
