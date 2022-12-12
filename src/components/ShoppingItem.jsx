@@ -15,7 +15,7 @@ function ShoppingItem({ shoppingItem, handleToggle }) {
                         {shoppingItem.text}
                     </span>
 
-                    <button id={shoppingItem.id} key={shoppingItem.id + shoppingItem.text} name="shopping" 
+                    <button id={shoppingItem.id} key={shoppingItem.id + shoppingItem.text} name="item" 
                             value={shoppingItem.id} onClick={handleClick} className={shoppingItem.completed ? "btn btn-dark" : "btn btn-primary"}>
                         <i className={shoppingItem.completed ? "fas fa-undo-alt" : "fas fa-check"}></i>
                     </button>

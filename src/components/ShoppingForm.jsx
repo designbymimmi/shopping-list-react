@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ShoppingForm({ addTask }) {
+function ShoppingForm({ addItem }) {
     const [userInput, setUserInput] = useState('');
 
     const handleChange = (e) => {
@@ -9,7 +9,7 @@ function ShoppingForm({ addTask }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addTask(userInput);
+        addItem(userInput);
         setUserInput('');
     };
     

@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingItem from './ShoppingItem.jsx'
+import ShoppingItem from './ShoppingItem.jsx';
 
 function ShoppingList({ shoppingListItems, handleToggle }) {
     return (
