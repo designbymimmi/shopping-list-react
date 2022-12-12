@@ -72,7 +72,7 @@ function App() {
     <div>
       <Header />
       <ShoppingForm addItem={addItem} />
-      <ShoppingList getAPIData={getAPIData} shoppingListItems={shoppingListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
+      <ShoppingList shoppingListItems={shoppingListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
       <DeleteCompleted handleFilter={handleFilter} />
     </div>
   );
