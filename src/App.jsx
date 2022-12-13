@@ -10,16 +10,14 @@ function App() {
   const [shoppingListItems, setShoppingListItems] = useState([]);
   const API_URL = "http://localhost:3001/api/v1/items";
 
-  // I SHOULD PROBABLY MOVE THIS INTO ITS OWN FILE AND THEN IMPORT IT
   const getAPIData = () => {
     axios.get(API_URL)
     .then((response) => {
-      const items = response.data;
-      // console.log(items)
+      console.log(response.data)
       // Add data to state
-      setShoppingListItems(items);
+      setShoppingListItems(response.data);
     })
-    .catch(error => console.error(`Error: ${error}`));
+    .catch(error => console.error(error));
   }
 
   // useEffect runs after APP is rendered.
@@ -36,7 +34,6 @@ function App() {
 
     axios.post(API_URL, newItem)
     .then(response => {
-      // Get the updated data
       getAPIData();
     })
 
@@ -66,24 +63,34 @@ function App() {
             getAPIData();
           }
             )
-          .catch(error => console.log(`Error: ${error}`));
+          .catch(error => console.log(error));
         }
       })
 
   };
 
   const handleFilter = () => {
-    let filtered = shoppingListItems.filter(task => {
-      return !task.completed;
-    });
-    setShoppingListItems(filtered);
+    // let filtered = shoppingListItems.filter(task => {
+    //   return !task.completed;
+    // });
+    // setShoppingListItems(filtered);
+
+    shoppingListItems.forEach(item => {
+      if (item.completed === true) {
+        axios.delete(API_URL + "/" + item.id.toString())
+        .then(response => {
+          getAPIData();
+        })
+        .catch(error => console.error(error))
+      }
+    })
   };
 
   return (
     <div>
       <Header />
       <ShoppingForm addItem={addItem} />
-      <ShoppingList shoppingListItems={shoppingListItems} handleToggle={handleToggle} handleFilter={handleFilter} />
+      <ShoppingList shoppingListItems={shoppingListItems} handleToggle={handleToggle} />
       <DeleteCompleted handleFilter={handleFilter} />
     </div>
   );
