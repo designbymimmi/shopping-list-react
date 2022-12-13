@@ -10,13 +10,13 @@ function App() {
   const [shoppingListItems, setShoppingListItems] = useState([]);
   const API_URL = "http://localhost:3001/api/v1/items";
 
-  // GET data from API
+  // I SHOULD PROBABLY MOVE THIS INTO ITS OWN FILE AND THEN IMPORT IT
   const getAPIData = () => {
     axios.get(API_URL)
     .then((response) => {
       const items = response.data;
-      console.log(items)
-      // add data to state
+      // console.log(items)
+      // Add data to state
       setShoppingListItems(items);
     })
     .catch(error => console.error(`Error: ${error}`));
@@ -36,9 +36,7 @@ function App() {
 
     axios.post(API_URL, newItem)
     .then(response => {
-      // console.log(response);
-      // console.log(response.data);
-      // get the updated data:
+      // Get the updated data
       getAPIData();
     })
 
@@ -50,15 +48,28 @@ function App() {
     // setshoppingListItems([...shoppingListItems].concat(newItem));
   };
 
-  //NEED TO ADD AXIOS PATCH/UPDATE THING HERE SO DATABASE UPDATES
   const handleToggle = (id) => {
-    const updatedshoppingItems = [...shoppingListItems].map((item) => {
-      if (item.id == id) {
-        item.completed = !item.completed; 
-      }
-      return item;
-    })
-    setShoppingListItems(updatedshoppingItems);
+    // const updatedshoppingItems = [...shoppingListItems].map((item) => {
+    //   if (item.id == id) {
+    //     item.completed = !item.completed; 
+    //   }
+    //   return item;
+    // })
+    // setShoppingListItems(updatedshoppingItems);
+
+      shoppingListItems.forEach(item => {
+        if (parseInt(id) === item.id) {
+          axios.patch(API_URL + "/" + id, {
+            completed: !item.completed
+          }
+          ).then(response => {
+            getAPIData();
+          }
+            )
+          .catch(error => console.log(`Error: ${error}`));
+        }
+      })
+
   };
 
   const handleFilter = () => {
