@@ -12,9 +12,7 @@ function App() {
 
   const getAPIData = () => {
     axios.get(API_URL)
-    .then((response) => {
-      console.log(response.data)
-      // Add data to state
+    .then(response => {
       setShoppingListItems(response.data);
     })
     .catch(error => console.error(error));
@@ -33,54 +31,26 @@ function App() {
     };
 
     axios.post(API_URL, newItem)
-    .then(response => {
-      getAPIData();
-    })
-
-    // const newItem = {
-    //   id: new Date().getTime(), //create unique ID
-    //   text: userInputText,
-    //   completed: false
-    // }
-    // setshoppingListItems([...shoppingListItems].concat(newItem));
+    .then(() => getAPIData())
   };
 
   const handleToggle = (id) => {
-    // const updatedshoppingItems = [...shoppingListItems].map((item) => {
-    //   if (item.id == id) {
-    //     item.completed = !item.completed; 
-    //   }
-    //   return item;
-    // })
-    // setShoppingListItems(updatedshoppingItems);
-
       shoppingListItems.forEach(item => {
         if (parseInt(id) === item.id) {
           axios.patch(API_URL + "/" + id, {
             completed: !item.completed
-          }
-          ).then(response => {
-            getAPIData();
-          }
-            )
+          })
+          .then(() => getAPIData())
           .catch(error => console.log(error));
         }
       })
-
   };
 
   const handleFilter = () => {
-    // let filtered = shoppingListItems.filter(task => {
-    //   return !task.completed;
-    // });
-    // setShoppingListItems(filtered);
-
     shoppingListItems.forEach(item => {
       if (item.completed === true) {
         axios.delete(API_URL + "/" + item.id.toString())
-        .then(response => {
-          getAPIData();
-        })
+        .then(() => getAPIData())
         .catch(error => console.error(error))
       }
     })
