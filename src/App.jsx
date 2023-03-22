@@ -8,7 +8,7 @@ import DeleteCompleted from './components/DeleteComplete.jsx';
 
 function App() {
   const [shoppingListItems, setShoppingListItems] = useState([]);
-  const API_URL = "http://localhost:3001/api/v1/items";
+  const API_URL = "https://shopping-list-rails-api.herokuapp.com/api/v1/items";
 
   const getAPIData = () => {
     axios.get(API_URL)
